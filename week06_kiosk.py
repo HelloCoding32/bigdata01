@@ -30,7 +30,7 @@ while True:
 # print(order_list)
 print("상품명 단가 수량 금액")
 for i in range(len(drinks)):
-    print(f"{drinks[i]} {prices[i]}원 {amounts[i]}잔 {amounts[i] * prices[i]}원")
+    print(f"{drinks[i]} {prices[i]} {amounts[i]} {amounts[i] * prices[i]}")
 # print(f"{drinks[0]} {prices[0]}원 {amounts[0]}잔 {amounts[0] * prices[0]}원")
 # print(f"{drinks[1]} {prices[1]}원 {amounts[1]}잔 {amounts[1] * prices[1]}원")
 # print(f"{drinks[2]} {prices[2]}원 {amounts[2]}잔 {amounts[2] * prices[2]}원")
