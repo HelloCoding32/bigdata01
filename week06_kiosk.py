@@ -32,5 +32,6 @@ while True:
 
 print("상품명 단가 수량 금액")
 for i in range(len(drinks)):
-    print(f"{drinks[i]} {prices[i]} {amounts[i]} {amounts[i] * prices[i]}")
+    if amounts[i] > 0:
+        print(f"{drinks[i]} {prices[i]} {amounts[i]} {amounts[i] * prices[i]}")
 print(f"총 주문 급액 : {total_price}")
