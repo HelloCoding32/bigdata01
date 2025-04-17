@@ -1,3 +1,5 @@
+from fontTools.ttLib.tables.otBase import valueRecordFormat
+
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
 total_price = 0
@@ -38,17 +40,18 @@ def print_receipt() -> None: # type hint
     print(f"총 주문 급액 : {total_price}")
 
 
-print(order_process(1))
-
 
 while True:
-    menu = int(input(display_menu()))
-    if len(drinks) >= menu >= 1:
-        order_process(menu - 1)
-    elif menu == len(drinks) + 1:
-        print("주문을 종료합니다.")
-        break
-    else:
-        print(f"{menu}번 메뉴는 존재하지 않습니다. 아래 메뉴에서 골라주세요.")
+    try:
+        menu = int(input(display_menu()))
+        if len(drinks) >= menu >= 1:
+            order_process(menu - 1)
+        elif menu == len(drinks) + 1:
+            print("주문을 종료합니다.")
+            break
+        else:
+            print(f"{menu}번 메뉴는 존재하지 않습니다. 아래 메뉴에서 골라주세요.")
+    except ValueError:
+        print(f"문자를 입력할 수 없습니다. 숫자를 입력해주세요.")
 
 print_receipt()
