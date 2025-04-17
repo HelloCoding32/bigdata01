@@ -20,6 +20,8 @@ n2 = int(input())
 if(n1 > n2):
     n1,n2 = n2,n1
 
+# 잘 해야겠지!!
+
 for i in range(n1, n2 + 1):
     if is_prime(i):
         print(i, end=' ')
