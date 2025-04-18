@@ -1,4 +1,3 @@
-
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
 total_price = 0
@@ -15,7 +14,6 @@ def order_process(idx: int) -> None:
     print(f"{drinks[idx]}를 주문하셨습니다. 가격은 {prices[idx]}원입니다.")
     total_price += prices[idx]
     amounts[idx] += 1
-
 
 def display_menu() -> str:
     """
@@ -37,3 +35,10 @@ def print_receipt() -> None: # type hint
         if amounts[i] > 0:
             print(f"{drinks[i] : <20} {prices[i] : ^6} {amounts[i] : ^6} {amounts[i] * prices[i] : ^6}")
     print(f"총 주문 급액 : {total_price}")
+
+def test() -> None:
+    """
+    앞으로 키오스크에 추가할 기능
+    :return: 없음
+    """
+    pass
