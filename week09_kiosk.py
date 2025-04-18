@@ -1,4 +1,4 @@
-from kiosk import *
+from kiosk import display_menu,drinks,order_process,print_receipt
 
 while True:
     try:
