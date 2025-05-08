@@ -4,6 +4,13 @@ total_price = 0
 
 amounts = [0] * len(drinks)
 
+def apply_discount(price: int) -> float:
+    """
+    총 금액이 특정 금액(임계값)을 넘어서면 할인율을 적용 함수
+    :param price:
+    :return: 할인이 적용된 금액 또는 할인이 적용되지 않은 금액
+    """
+    pass
 def order_process(idx: int) -> None:
     """
     주문 처리 함수  1) 주문 디스플레이 2) 총 주문 금액 누산 3) 주문 품목 수량 업데이트
@@ -17,7 +24,7 @@ def order_process(idx: int) -> None:
 
 def display_menu() -> str:
     """
-    음료 선택 메뉴 디스플레이 기능
+    음료 선택 메뉴 디스플레이 함수
     :return: 음료 메뉴 및 주문 종료 문자열
     """
     print("----"*30)
