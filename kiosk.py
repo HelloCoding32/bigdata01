@@ -19,6 +19,24 @@ def apply_discount(price: int) -> float:
     if price >= DISCOUNT_THRESHHOLD:
         return price * (1 - DISCOUNT_RATE)
     return price
+
+def get_ticket_number() -> int:
+    """
+    주문 번호표 처리 함수
+    :return: 번호
+    """
+
+    try:
+        with open('ticket.txt', 'r') as fp:
+            number = int(fp.read())
+    except FileNotFoundError:
+        # 파일을 만들자!
+        number  = 0
+        pass
+    number += 1
+    with open('ticket.txt', 'w') as fp:
+        fp.write(str(number))
+    return number
 def order_process(idx: int) -> None:
     """
     주문 처리 함수  1) 주문 디스플레이 2) 총 주문 금액 누산 3) 주문 품목 수량 업데이트
