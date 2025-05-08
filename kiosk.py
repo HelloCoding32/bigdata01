@@ -49,8 +49,16 @@ def print_receipt() -> None: # type hint
     for i in range(len(drinks)):
         if amounts[i] > 0:
             print(f"{drinks[i] : <20} {prices[i] : ^6} {amounts[i] : ^6} {amounts[i] * prices[i] : ^6}")
-    print(f"총 주문 급액 : {total_price}")
 
+    discounted_price = apply_discount(total_price)
+    discount = total_price - discounted_price
+
+    print(f"할인 전 주문 금액: {total_price}")
+    if discount > 0:
+        print(f"할인 금액 : {discount}원")
+        print(f"할인 적용 후 지불하실 총 금액 : {discounted_price}원")
+    else:
+        print(f"할인이 적용되지 않았습니다.\n지불하실 총 금액은 {total_price}원 입니다.")
 def test() -> None:
     """
     앞으로 키오스크에 추가할 기능
