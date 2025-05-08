@@ -1,8 +1,14 @@
+from wsgiref.util import request_uri
+
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
 total_price = 0
-
 amounts = [0] * len(drinks)
+
+# 할인 적용 정책
+DISCOUNT_THRESHHOLD = 10000 # 할인이 적용되는 임계값(임계값 이상이면 할인 적용)
+DISCOUNT_RATE = 0.1 # 할인율
+
 
 def apply_discount(price: int) -> float:
     """
@@ -10,7 +16,9 @@ def apply_discount(price: int) -> float:
     :param price:
     :return: 할인이 적용된 금액 또는 할인이 적용되지 않은 금액
     """
-    pass
+    if price >= DISCOUNT_THRESHHOLD:
+        return price * (1 - DISCOUNT_RATE)
+    return price
 def order_process(idx: int) -> None:
     """
     주문 처리 함수  1) 주문 디스플레이 2) 총 주문 금액 누산 3) 주문 품목 수량 업데이트
