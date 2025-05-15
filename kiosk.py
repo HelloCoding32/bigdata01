@@ -56,7 +56,7 @@ def print_ticket_number() -> None:
         cur.execute('INSERT INTO ticket (number) VALUES (?)', (n,))
     else:
         n = result[0] + 1
-        cur.execute('INSERT INTO ticket (number) VALUES (?)', (n,))
+        cur.execute('UPDATE ticket SET number = ?;', (n,))
     conn.commit()
     conn.close()
 
