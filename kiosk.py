@@ -1,3 +1,4 @@
+import sqlite3
 from wsgiref.util import request_uri
 import datetime
 
@@ -43,19 +44,24 @@ def print_ticket_number() -> None:
     주문 번호표 처리 함수
     :return: None
     """
+    conn = sqlite3.connect('cafe.db')
+    cur = conn.cursor()
+    cur.execute('''create table if not exists ticket (id integer primary key autoincrement, number integer not null)''')
+    conn.commit()
+    cur.execute('SELECT number FROM ticket order by number DESC LIMIT 1')
+    result = cur.fetchone()
 
-    try:
-        with open('ticket.txt', 'r') as fp:
-            number = int(fp.read())
-    except FileNotFoundError:
-        # 파일을 만들자!
-        number  = 0
-        pass
-    number += 1
-    with open('ticket.txt', 'w') as fp:
-        fp.write(str(number))
+    if result is None:
+        n  = 1
+        cur.execute('INSERT INTO ticket (number) VALUES (?)', (n,))
+    else:
+        n = result[0] + 1
+        cur.execute('INSERT INTO ticket (number) VALUES (?)', (n,))
+    conn.commit()
+    conn.close()
 
-    print(f"번호표 : {number}")
+    print(f"번호표 : {n} ")
+
 def order_process(idx: int) -> None:
     """
     주문 처리 함수  1) 주문 디스플레이 2) 총 주문 금액 누산 3) 주문 품목 수량 업데이트

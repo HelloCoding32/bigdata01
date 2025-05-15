@@ -2,3 +2,8 @@
 temp.py
 __pycache__/
 ticket.txt
+sqldiff
+sqlite3
+sqlite3_analyzer
+sqlite3_rsync
+*.db
