@@ -1,4 +1,5 @@
 from wsgiref.util import request_uri
+import datetime
 
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
@@ -95,6 +96,7 @@ def print_receipt() -> None: # type hint
         print(f"할인 적용 후 지불하실 총 금액 : {discounted_price}원")
     else:
         print(f"할인이 적용되지 않았습니다.\n지불하실 총 금액은 {total_price}원 입니다.")
+    print(f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 def test() -> None:
     """
     앞으로 키오스크에 추가할 기능
