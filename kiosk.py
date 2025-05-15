@@ -37,10 +37,10 @@ def apply_discount(price: int) -> float:
         return price * (1 - DISCOUNT_RATE)
     return price
 
-def get_ticket_number() -> int:
+def print_ticket_number() -> None:
     """
     주문 번호표 처리 함수
-    :return: 번호
+    :return: None
     """
 
     try:
@@ -53,7 +53,8 @@ def get_ticket_number() -> int:
     number += 1
     with open('ticket.txt', 'w') as fp:
         fp.write(str(number))
-    return number
+
+    print(f"번호표 : {number}")
 def order_process(idx: int) -> None:
     """
     주문 처리 함수  1) 주문 디스플레이 2) 총 주문 금액 누산 3) 주문 품목 수량 업데이트
