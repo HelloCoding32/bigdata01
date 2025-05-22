@@ -1,6 +1,6 @@
 import sqlite3
 from wsgiref.util import request_uri
-import datetime
+from datetime import datetime as dt
 
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
@@ -46,21 +46,23 @@ def print_ticket_number() -> None:
     """
     conn = sqlite3.connect('cafe.db')
     cur = conn.cursor()
-    cur.execute('''create table if not exists ticket (id integer primary key autoincrement, number integer not null)''')
+    cur.execute('''create table if not exists ticket (id integer primary key autoincrement, number integer not null,created_at text not null DEFAULT(dt('now','localtime')))''')
     conn.commit()
     cur.execute('SELECT number FROM ticket order by number DESC LIMIT 1')
     result = cur.fetchone()
 
+    now = dt.now().strftime('%Y-%m-%d %H:%M:%S');
     if result is None:
         n  = 1
-        cur.execute('INSERT INTO ticket (number) VALUES (?)', (n,))
+        cur.execute('INSERT INTO ticket (number, created_at) VALUES (?,?)', (n,now))
     else:
         n = result[0] + 1
-        cur.execute('UPDATE ticket SET number = ? where id= (SELECT number FROM ticket order by number DESC LIMIT 1);', (n,))
+        cur.execute('INSERT INTO ticket (number, created_at) VALUES (?,?)', (n, now))
+        # cur.execute('UPDATE ticket SET number = ? where id= (SELECT number FROM ticket order by number DESC LIMIT 1);', (n,))
     conn.commit()
     conn.close()
 
-    print(f"번호표 : {n} ")
+    print(f"번호표 : {n}, ({now}) ")
 
 def order_process(idx: int) -> None:
     """
@@ -102,7 +104,7 @@ def print_receipt() -> None: # type hint
         print(f"할인 적용 후 지불하실 총 금액 : {discounted_price}원")
     else:
         print(f"할인이 적용되지 않았습니다.\n지불하실 총 금액은 {total_price}원 입니다.")
-    print(f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"{dt.now().strftime('%Y-%m-%d %H:%M:%S')}")
 def test() -> None:
     """
     앞으로 키오스크에 추가할 기능
