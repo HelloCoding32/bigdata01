@@ -78,15 +78,18 @@ def order_process(idx: int) -> None:
 
 def display_menu() -> str:
     """
+    날씨 부가 정보 및 음료 선택 메뉴 디스플레이 함수
     음료 선택 메뉴 디스플레이 함수
     :return: 음료 메뉴 및 주문 종료 문자열
     """
-    url = f"https://wttr.in/suwon?format=%C+%t&lang=ko"
+    url = f"https://wttr.in/suwon?format=2&0&Q&lang=ko"
+    # url = f"https://wttr.in/suwon?&0&Q&lang=ko"
+    # url = f"https://wttr.in/suwon?format=%C+%t&lang=ko"
     # url = f"https://naver.com/kim" # 404 page not found
     # url = f"https://wttr123.in/suwon?format=%C+%t&lang=ko" # Website address Exception
     try:
         response = requests.get(url)
-        print(response.text.strip())
+        # print(response.text.strip())
         if response.status_code == 200:
             print(response.text.strip())
         else:
