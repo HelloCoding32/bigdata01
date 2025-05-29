@@ -62,7 +62,7 @@ def print_ticket_number() -> None:
     conn.commit()
     conn.close()
 
-    print(f"번호표 : {n}, ({now}) ")
+    print(f"번호표 : {n} ({now}) ")
 
 def order_process(idx: int) -> None:
     """
