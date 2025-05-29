@@ -1,6 +1,7 @@
 import sqlite3
 from wsgiref.util import request_uri
 from datetime import datetime as dt
+import requests
 
 prices = [2000, 2500,4000,4200]
 drinks = ["아이스 아메리카노","카페 라떼","수박 주스","딸기 주스"]
@@ -71,7 +72,7 @@ def order_process(idx: int) -> None:
     :return: 없음
     """
     global total_price
-    print(f"{drinks[idx]}를 주문하셨습니다. 가격은 {prices[idx]}원입니다.")
+    print(f"{drinks[idx]}를 주문하셨습니다. 가격은 {prices[idx]}원입니다.\n")
     total_price += prices[idx]
     amounts[idx] += 1
 
@@ -80,6 +81,19 @@ def display_menu() -> str:
     음료 선택 메뉴 디스플레이 함수
     :return: 음료 메뉴 및 주문 종료 문자열
     """
+    url = f"https://wttr.in/suwon?format=%C+%t&lang=ko"
+    # url = f"https://naver.com/kim" # 404 page not found
+    # url = f"https://wttr123.in/suwon?format=%C+%t&lang=ko" # Website address Exception
+    try:
+        response = requests.get(url)
+        print(response.text.strip())
+        if response.status_code == 200:
+            print(response.text.strip())
+        else:
+            print(f"상태 코드 : {response.status_code}")
+    except Exception as e:
+        print(f"오류 코드 : {e}")
+
     print("----"*30)
     menu_texts = "".join([f"{j+1}) {drinks[j]} {prices[j]}원\n " for j in range(len(drinks))])
     menu_texts += f"{len(drinks)+1}) 주문종료 : "
